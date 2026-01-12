@@ -10,18 +10,22 @@ export function Todos({ todos }) {
             <h2>{todos.description}</h2>
             <button
               onClick={() => {
-                fetch("http://localhost:3000/completed", {
-                  method: "PUT",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    id: todos._id,
-                  }),
-                }).then(async function (res) {
-                  const json = await res.json();
-                  alert("Marked as Completed");
-                });
+                if (!todos.completed) {
+                  fetch("http://localhost:3000/completed", {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      id: todos._id,
+                    }),
+                  }).then(async function (res) {
+                    const json = await res.json();
+                    alert("Marked as Completed");
+                  });
+                } else {
+                  alert("Already Completed");
+                }
               }}
             >
               {todos.completed ? "completed" : "mark as complete"}
