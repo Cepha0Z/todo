@@ -10,6 +10,8 @@ catch(err){
 }
 }
 
+connectDB();
+
 const todoschema=mongoose.Schema({
     title:String,
     description:String,
